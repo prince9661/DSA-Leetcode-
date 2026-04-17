@@ -13,8 +13,7 @@ public:
     ListNode* reverseList(ListNode* head) {
         if(head==nullptr ||head->next==nullptr)return head;
         ListNode * second=head->next;
-        ListNode*temp=reverseList(head->next);
-        // head->next->next=head;
+        ListNode*temp=reverseList(second);
         second->next=head;
         head->next=nullptr;
         return temp;
