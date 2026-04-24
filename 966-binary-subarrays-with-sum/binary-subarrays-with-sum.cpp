@@ -7,11 +7,10 @@ private:
         int ans=0;
         int s=0;
         for(int i=0;i<n;i++){
-            if(nums[i]==1)sum++;
+            sum+=nums[i];
             while(sum>k){
-                if(nums[s]==1){
-                    sum--;
-                }
+                sum-=nums[s];
+                
                 s++;
             }
             ans+=i-s+1;
