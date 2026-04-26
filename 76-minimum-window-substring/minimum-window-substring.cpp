@@ -1,14 +1,19 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        unordered_map<char,int>mp;
+        // unordered_map<char,int>mp;
+        vector<int>mp(256,0);
         int n=t.size();
+        int p=0;
         for(int i=0;i<n;i++){
+            if(mp[t[i]]==0)p++;
             mp[t[i]]++;
+
         }
         int l=0;
         int count=0;
-        n=mp.size();
+        // n=mp.size();
+        n=p;
         // int si=-1;
         // int length=INT_MAX;
         pair<int,int> ans={INT_MAX,-1};
