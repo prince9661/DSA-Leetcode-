@@ -1,22 +1,23 @@
 class Solution {
 public:
-    void solve(int n,int i,int j,string& s,vector<string>&ans){
-        if(i>n||j>n ||j>i)return ;
-        if(i==n&& j==n){
+    vector<string>ans;
+    void solve(int i,int j,int n,string &s){
+        if(j>i||i>n||j>n)return;
+        if(i==n&&j==n){
             ans.push_back(s);
+            return;
         }
-        s+='(';
-        solve(n,i+1,j,s,ans);
+        s+="(";
+        solve(i+1,j,n,s);
         s.pop_back();
-        s+=')';
-        solve(n,i,j+1,s,ans);
+        s+=")";
+        solve(i,j+1,n,s);
         s.pop_back();
-
     }
     vector<string> generateParenthesis(int n) {
-        vector<string >ans;
-        string s;
-        solve(n,0,0,s,ans);
+        string s="";
+        solve(0,0,n,s);
         return ans;
+        
     }
 };
