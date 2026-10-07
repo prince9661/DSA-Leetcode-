@@ -1,33 +1,25 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        // unordered_map<char,int>mp;
-        vector<int>mp(256,0);
-        int n=t.size();
-        int p=0;
-        for(int i=0;i<n;i++){
-            if(mp[t[i]]==0)p++;
-            mp[t[i]]++;
-
+        int totalChar = 0;
+        unordered_map<char,int>mp;
+        for(char c : t){
+            if(mp[c]==0)totalChar++;
+            mp[c]++;
         }
-        int l=0;
-        int count=0;
-        // n=mp.size();
-        n=p;
-        // int si=-1;
-        // int length=INT_MAX;
+        int st = 0;
         pair<int,int> ans={INT_MAX,-1};
-        for(int r=0;r<s.size();r++){
-            mp[s[r]]--;
-            if(mp[s[r]]==0)count++;
-            while(count>=n){
-                if(r-l+1<ans.first){
-                    ans.first=r-l+1;
-                    ans.second=l;
+        for(int end = 0; end < s.size(); end++){
+            mp[s[end]]--;
+            if(mp[s[end]] == 0)totalChar--;
+            while(totalChar <= 0){
+                if(end-st+1 <ans.first){
+                    ans.first = end - st +1;
+                    ans.second = st;
                 }
-                mp[s[l]]++;
-                if(mp[s[l]]>0)count--;
-                l++;
+                mp[s[st]]++;
+                if(mp[s[st]]>0)totalChar++;
+                st++;
             }
         }
         if(ans.second==-1)return "";
